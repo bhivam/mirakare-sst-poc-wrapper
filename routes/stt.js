@@ -16,7 +16,6 @@ const openai = new OpenAI();
 router.post('/', upload.single('file'), async function(req, res, next) {
     console.log(req.file);
     const file = await openai_uploads.toFile(Readable.from(req.file.buffer), `${Date.now()}.mp3`)
-
     openai.audio.translations.create({
         file: file,
         model: 'whisper-1',
@@ -35,10 +34,8 @@ router.post('/', upload.single('file'), async function(req, res, next) {
                 }
             ]
         }).then((structured_data) => res.send(structured_data.choices[0].message.content))
-        }
-        )
-        .catch((e) => console.log(e));
-
+        }).catch((e) => console.log(e));
 });
+
 
 module.exports = router;

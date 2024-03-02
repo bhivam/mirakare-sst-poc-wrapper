@@ -33,7 +33,9 @@ router.post('/', upload.single('file'), async function(req, res, next) {
                     content: transcript.text
                 }
             ]
-        }).then((structured_data) => res.send(structured_data.choices[0].message.content))
+        }).then((structured_data) => {
+            res.send(structured_data);
+        })
         }).catch((e) => console.log(e));
 });
 
